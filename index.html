@@ -87,14 +87,14 @@ input[type=range].un::-webkit-slider-thumb{background:#fff;box-shadow:0 0 0 1px 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head>
 <body><canvas id="bg"></canvas>
-<section id="login"><div class="box loginbox"><h1>Our date list</h1><p class="sub">Sign in to share your wishlist with each other.</p><p class="mut" id="configHint" hidden>Connect this project to Supabase to get started. See README.md.</p><form id="loginForm"><label class="l" for="email">Email</label><input id="email" type="email" autocomplete="username" required placeholder="you@example.com"><label class="l" for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Your password"><button class="btn" id="loginButton">Sign in</button><p class="mut" id="loginMessage" role="status"></p></form></div></section>
+<section id="login"><div class="box loginbox"><h1>Side Quest Board</h1><p class="sub">Sign in to share your wishlist with each other.</p><p class="mut" id="configHint" hidden>Connect this project to Supabase to get started. See README.md.</p><form id="loginForm"><label class="l" for="email">Email</label><input id="email" type="email" autocomplete="username" required placeholder="you@example.com"><label class="l" for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Your password"><button class="btn" id="loginButton">Sign in</button><p class="mut" id="loginMessage" role="status"></p></form></div></section>
 <main id="app" hidden>
 <div class="top">
-  <a class="logo" href="#wishlist"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" stroke-width="1.75"><circle cx="8" cy="10" r="7" stroke="#d93041"/><rect x="11" y="3" width="14" height="14" rx="4" stroke="#3547e8"/></svg>Our Date List</a>
+  <a class="logo" href="#wishlist"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" stroke-width="1.75"><circle cx="8" cy="10" r="7" stroke="#d93041"/><rect x="11" y="3" width="14" height="14" rx="4" stroke="#3547e8"/></svg>Side Quest Board</a>
   <div class="topright"><nav><a href="#wishlist" id="nL">Wishlist</a><a href="#new" id="nN">New wish</a></nav><button class="lk m" id="signOut">Sign out</button></div>
 </div>
 <section id="vList">
-  <h1>Our date list</h1>
+  <h1>Side Quest Board</h1>
   <p class="sub">Places we’d like to go and things we’d like to do together.</p>
   <div class="box"><div class="big" id="pt">–</div><div class="bar"><i id="pb"></i></div></div>
   <button class="lk m" id="historyToggle" style="margin-top:14px">Activity history</button><div class="box" id="historyBox" hidden style="margin-top:10px"><div id="historyList" class="mut">No activity yet.</div></div>
