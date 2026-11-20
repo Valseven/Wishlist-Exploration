@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Date List</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f5f5;--card:#fff;--ink:#2b2b2b;--mut:#6b6b70;--line:rgba(43,43,43,.12);--grid:rgba(43,43,43,.045);--red:#d93041;--blue:#3547e8;--green:#1ad93a;--gd:#0b7a1c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Figtree,Inter,system-ui,sans-serif;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+main{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:22px 18px 80px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:2px;border:1px solid var(--line);border-radius:10px;padding:3px;background:var(--card)}
+nav a{padding:6px 14px;border-radius:7px;text-decoration:none;color:var(--mut);font-weight:600;font-size:14px}
+nav a[aria-current]{background:var(--ink);color:#fff}
+h1{font-weight:700;font-size:clamp(36px,8vw,52px);line-height:1.05;letter-spacing:-.035em;margin:56px 0 12px}
+.sub{color:var(--mut);max-width:48ch;margin:0 0 32px;font-size:17px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.big{font-weight:700;font-size:15px;color:var(--mut)}.big b{font-size:34px;letter-spacing:-.03em;color:var(--ink);margin-right:6px}
+.bar{height:4px;border-radius:4px;background:var(--line);margin-top:14px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--blue);border-radius:4px;transition:width .8s cubic-bezier(.2,.8,.3,1)}
+.tools{display:flex;gap:4px;align-items:center;margin:30px 0 8px;border-bottom:1px solid var(--line)}
+.tab{border:0;background:none;color:var(--mut);font:600 15px Figtree,Inter,sans-serif;padding:10px 14px;margin-bottom:-1px;border-bottom:2px solid transparent;cursor:pointer}
+.tab.on{color:var(--ink);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:10px 20px;font:600 15px Figtree,Inter,sans-serif;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.97)}.btn.g{background:var(--card);color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.3;cursor:not-allowed}.btn.sm{padding:7px 14px;font-size:14px}
+input[type=text],input[type=email],input[type=password],input[type=date],textarea{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:11px 14px;font:400 16px Figtree,Inter,sans-serif;margin:6px 0 18px}
+input[type=text]:focus,textarea:focus,input[type=date]:focus{outline:2px solid var(--blue);outline-offset:1px}
+textarea{resize:vertical;min-height:80px;margin-bottom:12px}
+label.l{font-weight:600;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.th{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 14px;font:600 14px Figtree,Inter,sans-serif;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 2px rgba(0,0,0,.04);animation:in .4s both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.row{display:flex;gap:16px;align-items:center}
+.ck{flex:none;position:relative;width:46px;height:46px;border-radius:50%;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer;padding:0;transition:background .2s,border-color .2s}
+.ic,.hrt{position:absolute;inset:0;margin:auto}
+.ic{display:grid;place-items:center}
+.ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.hrt{width:24px;height:24px;fill:var(--red);transform:scale(0)}
+.ck.on{border-color:var(--red);background:rgba(217,48,65,.08)}.ck.on .hrt{transform:scale(1)}.ck.on .ic{display:none}
+.ck.fresh .hrt{animation:hp .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hp{0%{transform:scale(0)}60%{transform:scale(1.4)}100%{transform:scale(1)}}
+.ck.play{color:var(--blue);border-color:var(--blue)}.ck.play .ic svg{animation:wob .8s}
+@keyframes wob{30%{transform:scale(1.22) rotate(-8deg)}65%{transform:scale(.94) rotate(5deg)}}
+.arm{transform-origin:3px 8.5px;transform:rotate(-26deg)}.play .arm{animation:clap .55s ease-in forwards}
+@keyframes clap{70%{transform:rotate(3deg)}to{transform:rotate(0)}}
+.stm{transform-box:fill-box}.play .stm{animation:stm .7s}@keyframes stm{from{transform:translateY(4px);opacity:0}to{transform:translateY(-2px);opacity:1}}
+.lf{transform-origin:12px 21px}.play .lf{animation:gr .7s cubic-bezier(.3,1.5,.5,1)}@keyframes gr{from{transform:scale(0)}}
+.sun,.pl,.bt,.sp{transform-box:fill-box;transform-origin:center}
+.play .sun{animation:rs .7s}@keyframes rs{from{transform:translateY(9px)}}
+.play .pl{animation:fl .7s}@keyframes fl{from{transform:translate(-9px,9px);opacity:0}}
+.play .bt{animation:pr .35s 2}@keyframes pr{50%{transform:scale(.5)}}
+.play .sp{animation:sp .7s}@keyframes sp{to{transform:rotate(360deg)}}
+.tt{flex:1;min-width:0}.tt b{display:block;font-weight:600;font-size:18px;line-height:1.3;letter-spacing:-.01em;overflow-wrap:anywhere}
+.meta{font-size:13px;color:var(--mut);font-weight:500}
+.pd{display:inline-block;font-size:12px;font-weight:600;color:var(--gd);background:#e8f9ea;border-radius:99px;padding:1px 9px;margin-right:6px}
+.note{margin:8px 0 0 62px;font-size:14px;color:var(--mut)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0 62px;align-items:center}
+.lk{font:600 13px Figtree,Inter,sans-serif;color:var(--blue);background:none;border:0;padding:0;cursor:pointer}.lk.m{color:var(--mut)}
+.rvs{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px;animation:in .3s}
+@media(min-width:640px){.rvs{grid-template-columns:1fr 1fr}}
+.rv{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--bg)}
+.who{display:flex;align-items:center;gap:10px;margin-bottom:10px}.who h4{margin:0;font-weight:600;font-size:16px}
+.av{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.cr,.pr{display:grid;grid-template-columns:106px 1fr 16px;gap:10px;align-items:center;font-size:14px;font-weight:500;margin:6px 0}
+.cr b,.pr b{text-align:right;font-weight:600}
+.seg{display:flex;gap:3px}.seg i{flex:1;max-width:28px;height:6px;border-radius:3px;background:var(--line)}.seg i.on{background:var(--blue)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;margin:12px 0;outline:0;background:linear-gradient(90deg,var(--blue) var(--p,50%),var(--line) var(--p,50%))}
+input[type=range].un{background:var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 1px var(--blue),0 1px 3px rgba(0,0,0,.2);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--blue);border:3px solid #fff;outline:1px solid var(--blue);cursor:pointer}
+input[type=range].un::-webkit-slider-thumb{background:#fff;box-shadow:0 0 0 1px var(--mut),0 1px 3px rgba(0,0,0,.15)}input[type=range].un::-moz-range-thumb{background:#fff;outline-color:var(--mut)}
+.ov{display:flex;align-items:baseline;gap:8px;border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
+.ov b{font-weight:700;font-size:30px;letter-spacing:-.03em}.ov span{font-weight:600;font-size:14px}
+.memo{white-space:pre-wrap;font-size:14px;margin:10px 0 12px}.mut{color:var(--mut);font-size:13px}.hint{margin:0 0 10px}
+.empty{text-align:center;color:var(--mut);padding:48px 10px;font-weight:500}
+.pt{position:fixed;pointer-events:none;z-index:99}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .3s;z-index:100;max-width:90vw;text-align:center}
+#toast.on{opacity:1}
+#login{min-height:100vh;display:grid;place-items:center;padding:22px;position:relative;z-index:1}.loginbox{width:min(100%,420px)}.loginbox h1{margin:0 0 12px}.loginbox .btn{width:100%;margin-top:8px}.loginbox .mut{line-height:1.5}.topright{display:flex;align-items:center;gap:12px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body><canvas id="bg"></canvas>
+<section id="login"><div class="box loginbox"><h1>Our date list</h1><p class="sub">Sign in to share your wishlist with each other.</p><p class="mut" id="configHint" hidden>Connect this project to Supabase to get started. See README.md.</p><form id="loginForm"><label class="l" for="email">Email</label><input id="email" type="email" autocomplete="username" required placeholder="you@example.com"><label class="l" for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Your password"><button class="btn" id="loginButton">Sign in</button><p class="mut" id="loginMessage" role="status"></p></form></div></section>
+<main id="app" hidden>
+<div class="top">
+  <a class="logo" href="#wishlist"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" stroke-width="1.75"><circle cx="8" cy="10" r="7" stroke="#d93041"/><rect x="11" y="3" width="14" height="14" rx="4" stroke="#3547e8"/></svg>Our Date List</a>
+  <div class="topright"><nav><a href="#wishlist" id="nL">Wishlist</a><a href="#new" id="nN">New wish</a></nav><button class="lk m" id="signOut">Sign out</button></div>
+</div>
+<section id="vList">
+  <h1>Our date list</h1>
+  <p class="sub">Places we’d like to go and things we’d like to do together.</p>
+  <div class="box"><div class="big" id="pt">–</div><div class="bar"><i id="pb"></i></div></div>
+  <button class="lk m" id="historyToggle" style="margin-top:14px">Activity history</button><div class="box" id="historyBox" hidden style="margin-top:10px"><div id="historyList" class="mut">No activity yet.</div></div>
+  <div class="tools" id="tools"><button class="tab on" data-f="all">All</button><button class="tab" data-f="todo">To do</button><button class="tab" data-f="done">Done</button></div>
+  <div id="st" class="empty">Loading…</div><div id="list"></div>
+</section>
+<section id="vNew" hidden>
+  <h1>New wish</h1>
+  <p class="sub">Just a title and a type. Everything else is optional.</p>
+  <div class="box">
+    <label class="l" for="aT">Title</label><input type="text" id="aT" maxlength="80" placeholder="e.g. Sunset picnic at the park">
+    <label class="l">Type</label><div class="th" id="aTh"></div>
+    <label class="l" for="aN">Note (optional)</label><input type="text" id="aN" maxlength="140" placeholder="Anything worth remembering?">
+    <div style="display:flex;gap:10px"><button class="btn" id="aOk">Add to list</button><a class="btn g" href="#wishlist">Cancel</a></div>
+  </div>
+</section>
+<p class="mut" style="text-align:center;margin-top:56px">Made with 💛 for the of us</p>
+</main><div id="toast"></div>
+<script type="module">
+import { createClient } from '@supabase/supabase-js';
+const SUPABASE_URL=import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_PUBLISHABLE_KEY=import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const $=s=>document.querySelector(s);
+const S='<svg viewBox="0 0 24 24">';
+const TH={
+movie:['Movie',S+'<rect class="arm" x="3" y="4.5" width="18" height="4" rx="1"/><rect x="3" y="9.5" width="18" height="11" rx="2"/><path d="M8 4.5l-2 4M14 4.5l-2 4"/></svg>'],
+food:['Food',S+'<path d="M3 12h18a9 9 0 0 1-18 0z"/><path class="stm" d="M8 8c0-1.6 1.5-1.6 1.5-3.2M13.5 8c0-1.6 1.5-1.6 1.5-3.2"/></svg>'],
+nature:['Nature',S+'<path d="M12 21v-9"/><path class="lf" d="M12 13C7 13 5 10 5 6c4 0 7 2 7 7z"/><path class="lf" d="M12 11c0-4 2-6 7-6 0 4-3 6-7 6z"/></svg>'],
+beach:['Beach',S+'<circle class="sun" cx="12" cy="9" r="4"/><path d="M2 16c2.5-2 4.5-2 7 0s4.5 2 7 0 4.5-2 6 0M2 20.5c2.5-2 4.5-2 7 0s4.5 2 7 0 4.5-2 6 0"/></svg>'],
+trip:['Trip',S+'<path class="pl" d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>'],
+fun:['Games',S+'<rect x="2" y="7" width="20" height="11" rx="5.5"/><path d="M7 10.5v4M5 12.5h4"/><circle class="bt" cx="16" cy="11.5" r="1"/><circle class="bt" cx="18.5" cy="13.5" r="1"/></svg>'],
+other:['Other',S+'<path class="sp" d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>']};
+const HEART='<svg class="hrt" viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-10.6A4.4 4.4 0 0 1 12 7.5a4.4 4.4 0 0 1 8 2.4c0 5.7-8 10.6-8 10.6z"/></svg>';
+const CR=[['enjoy','Enjoyment'],['connect','Connection'],['exp','Experience'],['comfort','Comfort'],['mem','Memorability']];
+const PPL=[['yayan','Yayan'],['alca','Alca']];
+let db,wishes=[],rv={},filter='all',open=new Set(),editing=new Set(),drafts={},theme='movie',ready=false,pend=false,delId=null,just=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const fmt=d=>d?new Date(d+'T00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
+const full=r=>CR.every(([k])=>r&&r[k]);
+const mean=r=>full(r)?(CR.reduce((a,[k])=>a+r[k],0)/CR.length).toFixed(1):'–';
+const key=(w,p)=>w+'_'+p;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3200)}
+const fail=()=>toast('Could not save. Check your account access and Supabase setup.');
+function draft(k){if(!drafts[k]){const s=rv[k];drafts[k]=s?{r:{...s.r},memo:s.memo||''}:{r:{},memo:''}}return drafts[k]}
+function block(w,p,n){
+  const k=key(w,p),s=rv[k],ed=editing.has(k);
+  let h=`<div class="rv"><div class="who"><span class="av">${n[0]}</span><h4>${n}</h4></div>`;
+  if(s&&!ed){
+    h+=CR.map(([c,l])=>`<div class="pr"><span>${l}</span><span class="seg">${[1,2,3,4,5].map(i=>`<i class="${i<=s.r[c]?'on':''}"></i>`).join('')}</span><b>${s.r[c]}</b></div>`).join('')+
+    `<div class="ov"><span>Overall</span><b>${mean(s.r)}</b><span class="mut">/ 5</span></div>`+(s.memo?`<p class="memo">${esc(s.memo)}</p>`:'<div style="height:12px"></div>')+(p===actor?`<button class="btn g sm" data-edit="${k}">Edit review</button>`:'')}
+  else if(p!==actor){h+=`<p class="mut">Only ${esc(n)} can add or edit this review.</p>`}
+  else{const d=draft(k);
+    h+=CR.map(([c,l])=>{const v=d.r[c]||0;return `<div class="cr"><span>${l}</span><input type="range" min="1" max="5" step="1" value="${v||3}" class="${v?'':'un'}" style="--p:${v?(v-1)*25:50}%" data-k="${c}" data-rk="${k}" aria-label="${l}"><b>${v||'–'}</b></div>`}).join('')+
+    `<div class="ov"><span>Overall</span><b data-ov>${mean(d.r)}</b><span class="mut">/ 5</span></div><textarea data-memo="${k}" placeholder="Write a memo about the day…" style="margin-top:12px">${esc(d.memo)}</textarea>
+    <p class="mut hint" ${full(d.r)?'hidden':''}>Rate all five to get the overall score.</p>
+    <div style="display:flex;gap:8px"><button class="btn sm" data-save="${k}" data-w="${w}" data-p="${p}" ${full(d.r)?'':'disabled'}>Save review</button>${s?`<button class="btn g sm" data-cancel="${k}">Cancel</button>`:''}</div>`}
+  return h+'</div>'}
+function card(w){
+  const t=TH[w.theme]||TH.other,d=!!w.done,o=open.has(w.id);
+  let h=`<div class="card"><div class="row"><button class="ck ${d?'on':''} ${just===w.id?'fresh':''}" data-ck="${w.id}" aria-label="Mark as done"><span class="ic">${t[1]}</span>${HEART}</button><div class="tt"><b>${esc(w.title)}</b><span class="meta">${d?'<span class="pd">Done</span>':''}${t[0]}${d&&w.doneAt?' · '+fmt(w.doneAt):''}</span></div></div>`;
+  if(w.note)h+=`<p class="note">${esc(w.note)}</p>`;
+  if(d){const sum=PPL.filter(([p])=>rv[key(w.id,p)]).map(([p,n])=>`${n} ${mean(rv[key(w.id,p)].r)}`).join(' · ');
+    h+=`<div class="acts"><button class="lk" data-open="${w.id}">${o?'Hide review':'Review & memo'}</button>${sum?`<span class="meta">${sum}</span>`:''}</div>`;
+    if(o)h+=`<div class="acts" style="margin-top:14px"><span class="meta">Date</span><input type="date" data-date="${w.id}" value="${esc(w.doneAt||today())}" style="width:auto;margin:0;padding:6px 10px"></div><div class="rvs">${PPL.map(([p,n])=>block(w.id,p,n)).join('')}</div>`}
+  return h+`<div class="acts"><button class="lk m" data-del="${w.id}">${delId===w.id?'Sure? Tap again':'Delete'}</button></div></div>`}
+function render(){
+  const a=document.activeElement;if(a&&a.matches&&a.matches('#list textarea,#list input')){pend=true;return}
+  pend=false;const dn=wishes.filter(w=>w.done).length,tot=wishes.length;
+  $('#pt').innerHTML=tot?`<b>${dn}</b>of ${tot} completed`:'No wishes yet';$('#pb').style.width=tot?dn/tot*100+'%':'0';
+  const L=wishes.filter(w=>filter==='all'||(filter==='done')===!!w.done).sort((x,y)=>(x.at||0)-(y.at||0));
+  const st=$('#st');st.style.display=L.length?'none':'block';if(ready)st.textContent=tot?'Nothing in this filter.':'No wishes yet. Add your first one.';
+  $('#list').innerHTML=L.map(card).join('')}
+function burst(el){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,cols=['#d93041','#3547e8','#1ad93a','#2b2b2b'];
+  for(let i=0;i<22;i++){const p=document.createElement('span'),k=i%3,z=6+Math.random()*6;p.className='pt';
+    p.style.cssText+=`left:${x}px;top:${y}px;width:${z}px;height:${z}px;background:${cols[i%4]};${k==0?'border-radius:50%':k==1?'border-radius:2px':'clip-path:polygon(50% 0,100% 100%,0 100%)'}`;
+    document.body.appendChild(p);const an=Math.random()*6.283,d=50+Math.random()*130,dx=Math.cos(an)*d,dy=Math.sin(an)*d-40;
+    p.animate([{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px)) rotate(${Math.random()*540}deg)`,opacity:1,offset:.5},{transform:`translate(calc(-50% + ${dx*1.1}px),calc(-50% + ${dy+130}px)) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:900+Math.random()*600,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>p.remove()}}
+function route(){const n=location.hash==='#new';$('#vNew').hidden=!n;$('#vList').hidden=n;$('#nN').toggleAttribute('aria-current',n);$('#nL').toggleAttribute('aria-current',!n);scrollTo(0,0)}
+addEventListener('hashchange',route);route();
+$('#aTh').innerHTML=Object.entries(TH).map(([k,v])=>`<button type="button" class="chip ${k===theme?'on':''}" data-th="${k}">${v[1]}${v[0]}</button>`).join('');
+$('#aTh').onclick=e=>{const b=e.target.closest('[data-th]');if(!b)return;theme=b.dataset.th;$('#aTh').querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b))};
+$('#aOk').onclick=async()=>{const t=$('#aT').value.trim();if(!t){$('#aT').focus();return}if(!db)return toast('Still connecting, try again in a moment.');
+  try{const wish={title:t,theme,note:$('#aN').value.trim(),done:false,at:Date.now()};const {data,error}=await supabase.from('wishes').insert(wish).select().single();if(error)throw error;await logActivity(data,'added');$('#aT').value='';$('#aN').value='';location.hash='wishlist';toast('Added to the list')}catch(e){fail()}};
+$('#tools').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;filter=b.dataset.f;$('#tools').querySelectorAll('.tab').forEach(c=>c.classList.toggle('on',c===b));render()};
+$('#historyToggle').onclick=()=>{const box=$('#historyBox');box.hidden=!box.hidden;$('#historyToggle').textContent=box.hidden?'Activity history':'Hide activity history'};
+function onRange(t){const k=t.dataset.rk,dr=drafts[k];if(!dr)return;dr.r[t.dataset.k]=+t.value;t.classList.remove('un');t.style.setProperty('--p',(t.value-1)*25+'%');t.nextElementSibling.textContent=t.value;
+  const b=t.closest('.rv'),ok=full(dr.r);b.querySelector('[data-ov]').textContent=mean(dr.r);b.querySelector('[data-save]').disabled=!ok;b.querySelector('.hint').hidden=ok}
+['input','change','pointerup'].forEach(ev=>$('#list').addEventListener(ev,e=>{if(e.target.matches('input[type=range]'))onRange(e.target)}));
+$('#list').addEventListener('input',e=>{if(e.target.dataset.memo)draft(e.target.dataset.memo).memo=e.target.value});
+$('#list').addEventListener('change',async e=>{const w=e.target.dataset.date;if(w){try{await db.doc('wishes/'+w).update({doneAt:e.target.value})}catch(x){fail()}}});
+$('#list').addEventListener('click',async e=>{
+  const b=e.target.closest('button');if(!b)return;const D=b.dataset;
+  if(D.ck){const w=wishes.find(x=>x.id===D.ck);if(!w||!db||b.classList.contains('play'))return;
+    if(w.done){try{await db.doc('wishes/'+w.id).update({done:false,doneAt:null});await logActivity(w,'reopened')}catch(x){fail()}}
+    else{b.classList.add('play');setTimeout(async()=>{just=w.id;burst(b);open.add(w.id);try{await db.doc('wishes/'+w.id).update({done:true,doneAt:w.doneAt||today()});await logActivity(w,'completed')}catch(x){fail();b.classList.remove('play')}setTimeout(()=>just=null,1500)},850)}}
+  else if(D.open){open.has(D.open)?open.delete(D.open):open.add(D.open);render()}
+  else if(D.edit){delete drafts[D.edit];editing.add(D.edit);render()}
+  else if(D.cancel){editing.delete(D.cancel);delete drafts[D.cancel];render()}
+  else if(D.save){const k=D.save,dr=drafts[k];if(!dr||!full(dr.r))return;
+    try{await db.doc('rv/'+k).set({w:D.w,p:D.p,r:dr.r,o:+mean(dr.r),memo:dr.memo||'',at:Date.now()});await logActivity(wishes.find(x=>x.id===D.w),'review_saved');editing.delete(k);delete drafts[k];render();toast('Review saved')}catch(x){fail()}}
+  else if(D.del){if(delId===D.del){delId=null;try{const deleted=wishes.find(x=>x.id===D.del);await logActivity(deleted,'deleted');await Promise.all([db.doc('wishes/'+D.del).delete(),...PPL.map(([p])=>db.doc('rv/'+key(D.del,p)).delete().catch(()=>{}))])}catch(x){fail()}}else{delId=D.del;render();setTimeout(()=>{delId=null;render()},3000)}}
+  if(pend&&!D.ck)render()});
+let supabase,session=null,actor='',subscriptions=[],historyRows=[],authCheck=0;
+const toSnapshot=rows=>({docs:(rows||[]).map(row=>({id:row.id,data:()=>row}))});
+function makeDb(client){return {
+  collection(table){return {
+    add:async value=>{const {error}=await client.from(table).insert(value);if(error)throw error},
+    onSnapshot:async(cb,onError)=>{const load=async()=>{const {data,error}=await client.from(table).select('*');if(error){onError?.(error);return}cb(toSnapshot(data))};await load();return client.channel('table-'+table+'-'+Math.random()).on('postgres_changes',{event:'*',schema:'public',table},load).subscribe()}
+  }},
+  doc(path){const [table,id]=path.split('/');return {
+    set:async value=>{const {error}=await client.from(table).upsert({id,...value});if(error)throw error},
+    update:async value=>{const {error}=await client.from(table).update(value).eq('id',id);if(error)throw error},
+    delete:async()=>{const {error}=await client.from(table).delete().eq('id',id);if(error)throw error}
+  }}
+}}
+async function logActivity(wish,action){if(!supabase||!wish)return;const {error}=await supabase.from('activity_history').insert({wish_id:wish.id,wish_title:wish.title,action,actor});if(error)console.warn('Activity history could not be saved',error)}
+async function showSession(s){session=s;const check=++authCheck;if(!s){actor='';$('#login').hidden=false;$('#app').hidden=true;return}
+  const {data,error}=await supabase.from('members').select('name').eq('user_id',s.user.id).maybeSingle();if(check!==authCheck)return;
+  if(error||!data){$('#login').hidden=false;$('#app').hidden=true;$('#loginMessage').textContent='This account is not on the shared wishlist. Ask the owner to add it.';supabase.auth.signOut();return}
+  actor=data.name;$('#loginMessage').textContent='';$('#login').hidden=true;$('#app').hidden=false;initData()}
+function renderHistory(){const root=$('#historyList');if(!root)return;root.innerHTML=historyRows.length?historyRows.map(x=>`<div style="padding:9px 0;border-bottom:1px solid var(--line)"><b>${esc(x.wish_title)}</b><br>${esc(({added:'Added to the list',completed:'Marked as done',reopened:'Moved back to To do',deleted:'Removed from the list',review_saved:'Saved a review'})[x.action]||x.action)} · ${esc(x.actor==='yayan'?'Yayan':'Alca')} · ${new Date(x.happened_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>`).join(''):'No activity yet.'}
+function initData(){if(!supabase||!session||ready)return;db=makeDb(supabase);const tm=setTimeout(()=>{if(!ready)$('#st').textContent='Can’t reach the data yet. Check your connection and Supabase setup.'},10000);
+  Promise.all([db.collection('wishes').onSnapshot(s=>{wishes=s.docs.map(x=>({id:x.id,...x.data()}));ready=true;clearTimeout(tm);render()},()=>{$('#st').textContent='Could not load the list.'}),db.collection('rv').onSnapshot(s=>{rv={};s.docs.forEach(x=>rv[x.id]=x.data());render()},()=>{}),supabase.from('activity_history').select('*').order('happened_at',{ascending:false}).limit(30).then(({data,error})=>{if(!error){historyRows=data||[];renderHistory()}}).then(()=>supabase.channel('activity-history').on('postgres_changes',{event:'*',schema:'public',table:'activity_history'},()=>supabase.from('activity_history').select('*').order('happened_at',{ascending:false}).limit(30).then(({data})=>{historyRows=data||[];renderHistory()})).subscribe())]).then(ch=>subscriptions=ch.filter(Boolean));
+}
+if(!SUPABASE_URL||!SUPABASE_PUBLISHABLE_KEY){$('#configHint').hidden=false;$('#loginForm').hidden=true}
+else{supabase=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);supabase.auth.onAuthStateChange((_event,s)=>queueMicrotask(()=>showSession(s)));supabase.auth.getSession().then(({data})=>showSession(data.session))}
+$('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('#loginButton');b.disabled=true;$('#loginMessage').textContent='Signing in…';const {error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});b.disabled=false;if(error)$('#loginMessage').textContent='Sign-in failed. Check your email and password.'});
+$('#signOut').onclick=async()=>{subscriptions.forEach(ch=>supabase.removeChannel(ch));subscriptions=[];ready=false;wishes=[];rv={};await supabase.auth.signOut()};
+/* floating geometric background */
+(()=>{const cv=$('#bg'),cx=cv.getContext('2d'),D=Math.min(devicePixelRatio||1,2),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;let W,H,mx=-999,my=-999;
+const size=()=>{W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;cv.style.width=W+'px';cv.style.height=H+'px'};size();addEventListener('resize',size);
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY});addEventListener('pointerleave',()=>{mx=my=-999});
+const K=['ring','sq','tri','pill','plus','disc'],C=[[43,43,43,.28],[53,71,232,.5],[43,43,43,.28],[217,48,65,.45],[43,43,43,.28],[26,217,58,.6]],N=W<600?8:12;
+const P=Array.from({length:N},(_,i)=>({k:K[i%6],c:C[i%6],r:20+Math.random()*22,x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*1,vy:(Math.random()-.5)*1,a:Math.random()*6.28,va:(Math.random()-.5)*.01}));
+function shape(p){const [r0,g0,b0,al]=p.c;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.strokeStyle=`rgba(${r0},${g0},${b0},${al})`;cx.fillStyle=`rgba(${r0},${g0},${b0},.07)`;cx.lineWidth=1.5;cx.lineJoin=cx.lineCap='round';const r=p.r;cx.beginPath();
+  if(p.k==='ring'||p.k==='disc')cx.arc(0,0,r,0,6.283);else if(p.k==='sq')cx.roundRect(-r*.8,-r*.8,r*1.6,r*1.6,r*.28);else if(p.k==='pill')cx.roundRect(-r,-r*.5,r*2,r,r*.5);
+  else if(p.k==='tri'){cx.moveTo(0,-r);cx.lineTo(r*.9,r*.7);cx.lineTo(-r*.9,r*.7);cx.closePath()}else{cx.moveTo(-r*.7,0);cx.lineTo(r*.7,0);cx.moveTo(0,-r*.7);cx.lineTo(0,r*.7)}
+  if(p.k==='disc')cx.fill();cx.stroke();cx.restore()}
+function frame(){cx.setTransform(D,0,0,D,0,0);cx.clearRect(0,0,W,H);
+  if(!RM){for(const p of P){p.x+=p.vx;p.y+=p.vy;p.a+=p.va;
+    if(p.x<p.r){p.x=p.r;p.vx=Math.abs(p.vx)}if(p.x>W-p.r){p.x=W-p.r;p.vx=-Math.abs(p.vx)}if(p.y<p.r){p.y=p.r;p.vy=Math.abs(p.vy)}if(p.y>H-p.r){p.y=H-p.r;p.vy=-Math.abs(p.vy)}
+    const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d<130&&d>1){const f=(1-d/130)*.04;p.vx+=dx/d*f;p.vy+=dy/d*f}
+    const sp=Math.hypot(p.vx,p.vy);if(sp>1.3){p.vx*=1.3/sp;p.vy*=1.3/sp}else if(sp<.35){p.vx*=1.02;p.vy*=1.02}}
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const a=P[i],b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy),m=a.r+b.r;
+      if(d<m&&d>0){const nx=dx/d,ny=dy/d,o=(m-d)/2;a.x+=nx*o;a.y+=ny*o;b.x-=nx*o;b.y-=ny*o;const rel=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;if(rel<0){a.vx-=rel*nx;a.vy-=rel*ny;b.vx+=rel*nx;b.vy+=rel*ny}}}}
+  for(const p of P)shape(p);
+  if(!RM)requestAnimationFrame(frame)}
+frame()})();
+</script></body></html>
